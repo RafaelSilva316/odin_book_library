@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="styles.css" />
+    <script src="app.js" defer></script>
+    <title>Library</title>
+  </head>
+  <body>
+    <div class="library"></div>
+    <div class="btn-box"><button class="btn-add">NEW BOOK</button></div>
+    <div class="collapse-form">
+      <form class="add-book-form" action="">
+        <label for="book-title">Book Title:</label>
+        <input type="text" id="book-title" name="book-title" />
+        <label for="book-author">Book Author:</label>
+        <input type="text" id="book-author" name="book-author" />
+        <label for="book-pages">Book Pages:</label>
+        <input type="number" id="book-pages" name="book-pages" />
+        <div class="read-choices">
+          <div class="radio-btn-box">
+            <label for="book-read">Read</label>
+            <input type="radio" id="book-read" name="book-read" value="true" />
+          </div>
+          <div class="radio-btn-box">
+            <label for="book-not-read">Not Read</label>
+            <input
+              type="radio"
+              id="book-not-read"
+              name="book-read"
+              value="false"
+            />
+          </div>
+        </div>
+      </form>
+      <button type="submit" class="btn-submit">Add Book</button>
+    </div>
+  </body>
+</html>
