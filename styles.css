@@ -1,3 +1,4 @@
+/* ALL */
 * {
   margin: 0;
   padding: 0;
@@ -7,6 +8,7 @@ body {
   background-color: #fdeedb;
 }
 
+/* LIB */
 .library {
   max-width: 900px;
   display: grid;
@@ -17,6 +19,7 @@ body {
   /* margin-top: 40px; */
 }
 
+/* CARDs */
 .book-card {
   /* max-width: 200px; */
   background-color: #eee;
@@ -35,7 +38,7 @@ body {
   margin-bottom: 10px;
   font-family: sans-serif;
 }
-.book-card p:first-child {
+.book-card p:nth-child(2) {
   /* justify-item: flex-start; */
   font-weight: 700;
   font-family: serif;
@@ -44,6 +47,7 @@ body {
   font-size: 32px;
   margin-bottom: 30px;
   color: #331b00;
+  text-transform: capitalize;
 }
 
 .book-card div button {
@@ -73,12 +77,14 @@ body {
   background-color: #915001;
 }
 
+/* BTN */
 .btn-box {
   display: flex;
   justify-content: center;
   align-items: center;
 }
 
+/* FORM */
 .btn-add,
 .btn-submit {
   /* text-align: center; */
@@ -118,18 +124,25 @@ body {
   font-size: 20px;
   font-family: sans-serif;
 }
+
 .add-book-form input {
   margin-top: -8px;
   border-top: 0;
   border-left: 0;
   font-size: 20px;
 }
+
 .add-book-form input:focus-visible {
   outline: none;
   border: 1px solid #aaa;
   /* border-bottom: 2px solid #888; */
   box-shadow: 2px 10px 10px rgba(131, 81, 81, 0.1);
 }
+
+.add-book-form input:invalid {
+  border-bottom: dotted red 2px;
+}
+
 .read-choices {
   display: flex;
   flex-direction: column;

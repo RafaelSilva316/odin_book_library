@@ -1,28 +1,29 @@
 let myLibrary = [];
 
-function Book(title, author, pages, read) {
-  // the constructor...
-  this.title = title;
-  this.author = author;
-  this.pages = pages;
-  if (read) {
-    this.read = "read it";
-  } else {
-    this.read = "not read yet";
+class Book {
+  constructor(title, author, pages, read) {
+    this.title = title;
+    this.author = author;
+    this.pages = pages;
+    if (read) {
+      this.read = "read it";
+    } else {
+      this.read = "not read yet";
+    }
+  }
+
+  toggleRead() {
+    if (this.read == "read it") {
+      this.read = "not read yet";
+    } else {
+      this.read = "read it";
+    }
+  }
+
+  info() {
+    return `${this.title} by ${this.author}, ${this.pages} pages, ${this.read}`;
   }
 }
-
-Book.prototype.toggleRead = function () {
-  if (this.read == "read it") {
-    this.read = "not read yet";
-  } else {
-    this.read = "read it";
-  }
-};
-
-Book.prototype.info = function () {
-  return `${this.title} by ${this.author}, ${this.pages} pages, ${this.read}`;
-};
 
 function addBookToLibrary() {
   // do stuff here
@@ -55,11 +56,6 @@ buttonAdd.addEventListener("click", function () {
   const collpaseForm = document.querySelector(".collapse-form");
   collpaseForm.classList.toggle("hidden");
 });
-
-// const deleteCard = function () {
-//   // console.log("DELETE");
-
-// };
 
 const displayBook = function (book) {
   // myLibrary.push(book);
@@ -145,29 +141,56 @@ function displayLib() {
 
 displayLib();
 
+let bTitle = document.querySelector("#book-title");
+let bAuthor = document.querySelector("#book-author");
+let bPages = document.querySelector("#book-pages");
+
 const buttonSubmit = document.querySelector(".btn-submit");
-buttonSubmit.addEventListener("click", function () {
-  console.log("clicked");
-  let bookTitle = document.querySelector("#book-title").value;
-  let bookAuthor = document.querySelector("#book-author").value;
-  let bookPages = document.querySelector("#book-pages").value;
-  let radioBtns = document.getElementsByName("book-read");
-  let bookRead = true;
-  console.log(radioBtns.length);
-  for (i = 0; i < radioBtns.length; i++) {
-    console.log(radioBtns[i].value);
-    if (radioBtns[i].checked) {
-      if (radioBtns[i].value == "true") {
-        bookRead = true;
-      } else {
-        bookRead = false;
+buttonSubmit.addEventListener("click", function (event) {
+  let formFields = [];
+  formFields.push(validateField(bTitle));
+  formFields.push(validateField(bAuthor));
+  formFields.push(validateField(bPages));
+  if (isFormValid([formFields])) {
+    let bookTitle = bTitle.value;
+    let bookAuthor = bAuthor.value;
+    let bookPages = bPages.value;
+    let radioBtns = document.getElementsByName("book-read");
+    let bookRead = true;
+
+    for (i = 0; i < radioBtns.length; i++) {
+      if (radioBtns[i].checked) {
+        if (radioBtns[i].value == "true") {
+          bookRead = true;
+        } else {
+          bookRead = false;
+        }
       }
     }
+
+    let newBook = new Book(bookTitle, bookAuthor, bookPages, bookRead);
+    myLibrary.push(newBook);
+    displayBook(newBook);
+    bTitle.value = "";
+    bAuthor.value = "";
+    bPages.value = "";
+    event.preventDefault();
   }
-  let newBook = new Book(bookTitle, bookAuthor, bookPages, bookRead);
-  console.log(newBook);
-  myLibrary.push(newBook);
-  displayBook(newBook);
 });
 
-// const buttonDelete = document.querySelector("btn-delete");
+const isFormValid = function ([fields]) {
+  for (let i = 0; i < fields.length; i++) {
+    if (fields[i] === false) {
+      return false;
+    }
+  }
+  return true;
+};
+
+const validateField = function (field) {
+  if (!field.checkValidity()) {
+    //let reported = reportValidity();
+    return false;
+  }
+  return true;
+};
